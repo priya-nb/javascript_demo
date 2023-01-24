@@ -76,14 +76,14 @@ const employees = [
         "https://sanikapareek-contentstack.github.io/sanika-portfolio/",
     },
     {
-      id: "9",
+      id: "10",
       name: "Raj Pandey",
       profileImage: "assets/images/Raj.png",
       introduction: "Computer Engineer, Painter, Poet, Reader",
       profileLink: "https://cs-raj.github.io/pw-2/",
     },
     {
-      id: "10",
+      id: "11",
       name: "Viraj Yadav",
       profileImage: "assets/images/Viraj.jpg",
       introduction:
@@ -91,7 +91,7 @@ const employees = [
       profileLink: "https://vikasrangaswamy.github.io/Contentstack/#",
     },
     {
-      id: "11",
+      id: "12",
       name: "Faraaz Biyabani",
       profileImage: "assets/images/faraaz.webp",
       introduction:
@@ -99,7 +99,7 @@ const employees = [
       profileLink: "https://faraazb.github.io/cs-personal-website/",
     },
     {
-      id: "12",
+      id: "13",
       name: "Vaibhav Patil",
       profileImage: "assets/images/Vaibhav.png",
       introduction:
@@ -107,7 +107,7 @@ const employees = [
       profileLink: "https://vaibhav-patil07.github.io/portfolio/#",
     },
     {
-      id: "13",
+      id: "14",
       name: "Soumik Paul",
       profileImage: "assets/images/Soumik.png",
       introduction: "2x ICPC regionalist and first runner-up at Techsurf 2022.",
@@ -132,9 +132,9 @@ function Employee(id,name,profileImage,introduction,profileLink){
     return this;
 }
 
+/*
 
-
-//creating instance of class Employee
+//creating instance of class Employee without map
 const emp1= new Employee("1","Vibhuti Bajaj", "assets/images/Vibhuti.jpg","I like playing cricket and travelling. I'm always focused on the task which I take at hand.","https://vibhi24.github.io/Personal-Website/");
 const emp2= new Employee( "2", "Varun Athreya","assets/images/varun.jpg","I am a passionate coder who loves capturing memories and exploring new places.", "https://varunsathreya.github.io/contentstack-training/");
 const emp3= new Employee( "3","Priya NB","assets/images/Priya.jpeg", "I'm enthusiastic to learn new things and I don't give up until i achieve it.","https://priya-nb.github.io/personalweb/index.html");
@@ -160,12 +160,29 @@ const Employees=[emp1,emp2,emp3,emp4,emp5,emp6,emp7,emp8,emp9,emp10,emp11,emp12,
 console.log(Employees)
 
 
+*/
+
+
+//creating instance of class Employee with map
+
+//empty array to store instance class Employee
+let Employees=[];
+
+//maps returns array
+let MAp= employees.map((data)=>{
+
+  Employees.push(new Employee(data.id,data.name,data.profileImage,data.introduction,data.profileLink))
+
+})
+
+
+console.log(Employees)
 
 //1) find employee object by employee id
 
  function findElementbyId(id) {
 
-    return  Employees.find(element => element.id==id);
+    return  Employees.find(element => element.id===id);
 
 
     
@@ -175,6 +192,7 @@ console.log(findElementbyId("3"));
 
 
 // 2)find employee information that matches the search object
+//taking object as key value pair
 
 function findEmployee(key,value){
 
@@ -213,6 +231,8 @@ console.log(findEmployee("name","Priya NB"));
 
 
 //3) update employee id
+
+//taking Empid and object as key value pair
 
 function updateEmployeeById(EmpId,key,value)
 {
