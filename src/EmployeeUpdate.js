@@ -132,35 +132,7 @@ function Employee(id,name,profileImage,introduction,profileLink){
     return this;
 }
 
-/*
 
-//creating instance of class Employee without map
-const emp1= new Employee("1","Vibhuti Bajaj", "assets/images/Vibhuti.jpg","I like playing cricket and travelling. I'm always focused on the task which I take at hand.","https://vibhi24.github.io/Personal-Website/");
-const emp2= new Employee( "2", "Varun Athreya","assets/images/varun.jpg","I am a passionate coder who loves capturing memories and exploring new places.", "https://varunsathreya.github.io/contentstack-training/");
-const emp3= new Employee( "3","Priya NB","assets/images/Priya.jpeg", "I'm enthusiastic to learn new things and I don't give up until i achieve it.","https://priya-nb.github.io/personalweb/index.html");
-const emp4= new Employee("4","Rangaswamy Vikas","assets/images/vikas.jpg","I enjoy balancing my love for learning with my passion for gaming and a fit lifestyle.","https://vikasrangaswamy.github.io/portfolio/main.html");
-const emp5= new Employee("5","Deepak Chaturvedi","assets/images/deepak.png","Believer, Dedicated. I am a curious developer that loves to convert ideas into code.","https://thedeepakchaturvedi.github.io/Portfolio/");
-const emp6= new Employee( "6","Rakshitha S","assets/images/Rakshitha.jpg","I'm passionate to meet people, learn new things. I love challenges and interested in travelling.","#");
-const emp7= new Employee( "7","Kashmeera Raychoty","assets/images/Kashmeera.jpg", "I am a creative person and like to explore new things.","https://kashmeeraraychoty.github.io/Kashmeera-s-Portfolio/");
-const emp8= new Employee("8","Harshitha D","assets/images/Harshitha D.png","I'm a partical person and like to travel and listen K-pop.","https://harshithad0703.github.io/individual_website/");
-const emp9= new Employee( "9","Sanika Pareek","assets/images/sanika.jpeg","I'm curious to learn and explore new things and like to paint.","https://sanikapareek-contentstack.github.io/sanika-portfolio/");
-const emp10= new Employee("10","Raj Pandey","assets/images/Raj.png","Computer Engineer, Painter, Poet, Reader","https://cs-raj.github.io/pw-2/");
-const emp11= new Employee( "11","Viraj Yadav","assets/images/Viraj.jpg","I'm a sincere lunatic curious about technology and like playing cricket.","https://vikasrangaswamy.github.io/Contentstack/#");
-const emp12= new Employee("12","Faraaz Biyabani","assets/images/faraaz.webp","I am always curious about technology and I love writing code to create purposeful things.","https://faraazb.github.io/cs-personal-website/");
-const emp13= new Employee( "13", "Vaibhav Patil", "assets/images/Vaibhav.png", "I'm a true technophile. I love to talk about Physics and Spirituality.","https://vaibhav-patil07.github.io/portfolio/#");
-const emp14= new Employee("14","Soumik Paul", "assets/images/Soumik.png","2x ICPC regionalist and first runner-up at Techsurf 2022.","https://soumik43.github.io/Portfolio/");
-
-
-
-
-// storing instance of class Employee in new array called Employees
-
-const Employees=[emp1,emp2,emp3,emp4,emp5,emp6,emp7,emp8,emp9,emp10,emp11,emp12,emp13,emp14];
-
-console.log(Employees)
-
-
-*/
 
 
 //creating instance of class Employee with map
@@ -194,68 +166,57 @@ console.log(findElementbyId("3"));
 // 2)find employee information that matches the search object
 //taking object as key value pair
 
-function findEmployee(key,value){
 
-    //to  restrict the object other than one key value pair
-    
-   
-    //par variable  contains arguments length of findemployee can take  is 2 means 1 key and 1 pair  
 
- 
-    var par=arguments.length;
-    if(par ===2){
+//taking object as serch parameter
 
-          const object=Employees.find(el=>el[key] ===value)
+const searchobject={ name:"Priya NB"}
 
-               if(typeof (object) ==="object"){
-                   console.log(object)
-               }
-    
+let findEmployeebyobj=(searchobject)=>{
 
-               else{
-                  console.log("No Employee found with",key,value)  
-               }
-   }
+  return Employees.find(function(employee){
 
-    else{
-
-        console.log("Enter only one key value pair")
-   }
-
+    return Object.entries(searchobject).every(([key,value])=>employee[key]===value);
+  });
 }
 
 
-
-console.log(findEmployee("name","Priya NB"));
-
+//console.log(findEmployeebyobj(searchobject));
 
 
 //3) update employee id
 
-//taking Empid and object as key value pair
 
-function updateEmployeeById(EmpId,key,value)
+
+const updatesearchobject={ name : "hhhPriya NB"}
+
+let updateEmployeeById=(id,updateobject)=>
 {
+   const idx=Employees.findIndex(el=>el.id===id)
 
-    var idx = Employees.findIndex(function(Employee,idx){
-        if(Employee.id === EmpId)
+    if(idx!==-1){
 
-        return true;
-         });
-        if(idx!==-1){
-            Employees[idx][key] = value
-            console.log("Updated value is:",Employees[idx])
+      for(const key in updateobject){
+  
+        //should not update id 
+        if(key !=="id"){
+
+          Employees[idx][key]=updateobject[key]
+         // console.log(Employees[2]);
         }
-        else
-        console.log("Invalid id")
+      }
 
-
+    return true;
+   
 
     }
 
+    console.log("invalid index")
+   
+  }
 
-updateEmployeeById("5","name","hari");
-
+  console.log(updateEmployeeById('3',updatesearchobject));
+  console.log(Employees[2]);
 
 
 
@@ -265,7 +226,7 @@ updateEmployeeById("5","name","hari");
 
 function deleteEmployeeById(id){
 
-    let idx=Employees.findIndex(el=>el.id==id)
+    let idx=Employees.findIndex(el=>el.id===id)
     Employees.splice(idx,1);
 
     return Employees;
